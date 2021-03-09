@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+//using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
@@ -10,7 +10,6 @@ public class Character : MonoBehaviour
     [Range(0, 20)] public float jump = 1;
     [Range(-20, 20)] public float gravity = -9.8f;
     public Animator animator;
-    public Weapon weapon;
     public eSpace space = eSpace.World;
     public eMovement movement = eMovement.Free;
     public float turnRate = 3;
@@ -31,7 +30,6 @@ public class Character : MonoBehaviour
 
     CharacterController characterController;
     Rigidbody rb;
-    Health health;
 
     bool onGround = false;
     bool useSession = false;
@@ -43,7 +41,6 @@ public class Character : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
-        health = GetComponent<Health>();
         cameraTransform = Camera.main.transform;
         useSession = (GameSession.Instance != null);
     }
@@ -51,21 +48,6 @@ public class Character : MonoBehaviour
     void Update()
     {
         if (animator.GetBool("Death")) return;
-
-        if (useSession)
-        {
-            if (GameSession.Instance.State == GameSession.eState.StartSession)
-            {
-                health.health = health.healthMax;
-            }
-        }
-        else if (Game.Instance != null)
-        {
-            if (Game.Instance.State == Game.eState.StartGame)
-            {
-                health.health = health.healthMax;
-            }
-        }
 
         onGround = characterController.isGrounded;
         if (onGround && velocity.y < 0)
@@ -127,43 +109,15 @@ public class Character : MonoBehaviour
         // Gravity Movement
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
-
-        if (health.isDead)
-        {
-            ResetSpeed();
-        }
-    }
-
-    public void ResetSpeed()
-    {
-        inputDirection = Vector3.zero;
-        animator.SetFloat("Speed", inputDirection.magnitude);
     }
 
     public void OnDeath()
     {
         animator.SetBool("Death", true);
-        EventManager.Instance.TriggerEvent("PlayerDead");
+        //EventManager.Instance.TriggerEvent("PlayerDead");
     }
 
-    public void OnFire()
-    {
-        if (!animator.GetBool("Death") && GameSession.Instance.State == GameSession.eState.Session)// && Game.Instance.State == Game.eState.Game)
-        {
-            weapon.Fire(transform.forward);
-        }
-    }
-
-    public void OnJump()
-    {
-        // Jump
-        if (onGround && !animator.GetBool("Death") && GameSession.Instance.State == GameSession.eState.Session)// && Game.Instance.State == Game.eState.Game)
-        {
-            velocity.y += jump;
-        }
-    }
-
-    public void OnMove(InputValue input)
+    /*public void OnMove(InputValue input)
     {
         if (!animator.GetBool("Death") && GameSession.Instance.State == GameSession.eState.Session)// && Game.Instance.State == Game.eState.Game)
         {
@@ -172,21 +126,5 @@ public class Character : MonoBehaviour
             inputDirection.x = v2.x;
             inputDirection.z = v2.y;
         }
-    }
-
-    public void OnPunch()
-    {
-        if (!animator.GetBool("Death") && GameSession.Instance.State == GameSession.eState.Session)// && Game.Instance.State == Game.eState.Game)
-        {
-            animator.SetTrigger("Punch");
-        }
-    }
-
-    public void OnThrow()
-    {
-        if (!animator.GetBool("Death") && GameSession.Instance.State == GameSession.eState.Session)// && Game.Instance.State == Game.eState.Game)
-        {
-            animator.SetTrigger("Throw");
-        }
-    }
+    }*/
 }

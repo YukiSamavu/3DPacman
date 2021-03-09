@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+//using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Camera))]
 public class CharacterCamera : MonoBehaviour
@@ -45,7 +45,7 @@ public class CharacterCamera : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(direction);
     }
 
-    public void OnPitch(InputAction.CallbackContext callbackContext)
+    /*public void OnPitch(InputAction.CallbackContext callbackContext)
     {
         pitch += callbackContext.ReadValue<float>();
         pitch = Mathf.Clamp(pitch, -10, 30);
@@ -55,20 +55,20 @@ public class CharacterCamera : MonoBehaviour
     {
         yaw += callbackContext.ReadValue<float>();
         if (clampYaw) yaw = Mathf.Clamp(yaw, -cameraRotationX, cameraRotationX);
-    }
+    }*/
 
-    public void OnDistance(InputAction.CallbackContext callbackContext)
+    /*public void OnDistance(InputAction.CallbackContext callbackContext)
     {
         distance += callbackContext.ReadValue<float>();
         distance = Mathf.Clamp(distance, 2, 8);
-    }
+    }*/
 
-    public void OnCenter(InputAction.CallbackContext callbackContext)
+    /*public void OnCenter(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.started)
         {
             yaw = 0;
             pitch = 0;
         }
-    }    
+    } */   
 }

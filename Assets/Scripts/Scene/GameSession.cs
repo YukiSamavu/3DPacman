@@ -21,7 +21,7 @@ public class GameSession : MonoBehaviour
     public GameObject gameOverScreen;
 
     GameObject player;
-    Health playerHealth;
+    //Health playerHealth;
 
     static GameSession instance = null;
     public static GameSession Instance
@@ -52,7 +52,7 @@ public class GameSession : MonoBehaviour
 
     private void Start()
     {
-        EventManager.Instance.Subscribe("PlayerDead", CheckDeath);
+        //EventManager.Instance.Subscribe("PlayerDead", CheckDeath);
     }
 
     private void Update()
@@ -68,14 +68,14 @@ public class GameSession : MonoBehaviour
                     Destroy(player);
                     player = null;
                 }
-                GameController.Instance.transition.StartTransition(Color.clear, 1);
-                EventManager.Instance.TriggerEvent("StartSession");
-                if (player == null)
+                //GameController.Instance.transition.StartTransition(Color.clear, 1);
+                //EventManager.Instance.TriggerEvent("StartSession");
+                /*if (player == null)
                 {
                     player = GameObject.FindGameObjectWithTag("Player");
                     playerHealth = player.GetComponent<Health>();
                     playerHealth.slider = slider;
-                }
+                }*/
                 State = eState.Session;
                 break;
             case eState.Session:
@@ -85,7 +85,6 @@ public class GameSession : MonoBehaviour
             case eState.EndSession:
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                player.GetComponent<Character>().ResetSpeed();
                 State = eState.GameOver;
                 break;
             case eState.GameOver:
@@ -127,12 +126,12 @@ public class GameSession : MonoBehaviour
 
     private void CheckDeath()
     {
-        if (playerHealth != null)
+        /*if (playerHealth != null)
         {
             if (playerHealth.health <= 0)
             {
                 State = eState.EndSession;
             }
-        }
+        }*/
     }
 }

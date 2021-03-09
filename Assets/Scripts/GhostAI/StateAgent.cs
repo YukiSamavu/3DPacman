@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(StateMachine))]
+/*[RequireComponent(typeof(StateMachine))]*/
 public class StateAgent : Agent
 {
-    public StateMachine StateMachine { get; private set; }
+    /*public StateMachine StateMachine { get; private set; }
 
     void Start()
     {
@@ -16,5 +16,5 @@ public class StateAgent : Agent
     {
         animator.SetFloat("Speed", movement.Velocity.magnitude);
         StateMachine.Execute();
-    }
+    }*/
 }
