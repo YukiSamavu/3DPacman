@@ -149,6 +149,11 @@ public class GameController : MonoBehaviour
         OnPauseScreen();
     }
 
+    public void OnQuit()
+    {
+        Application.Quit();
+    }
+
     public void OnMasterVolume(float level)
     {
         audioMixer.SetFloat("MasterVolume", level);
