@@ -58,6 +58,11 @@ public class GameSession : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GameController.Instance.OnPause();
+        }
+
         switch (State)
         {
             case eState.Load:
@@ -67,7 +72,7 @@ public class GameSession : MonoBehaviour
             case eState.StartSession:
                 if (gameOverScreen != null) gameOverScreen.SetActive(false);
                 //timer = 30.0f;
-                //Score = 0;
+                Score = 0;
                 if (player != null)
                 {
                     Destroy(player);

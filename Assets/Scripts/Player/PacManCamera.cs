@@ -1,27 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Camera))]
-public class CharacterCamera : MonoBehaviour
+public class PacManCamera : MonoBehaviour
 {
     public Transform targetTransform;
-    public Vector3 offset;
-    [Range(0, 20)] public float rate = 1.0f;
+    [Range(0, 20)] public float rate = 5.0f;
     public bool orientToTarget = true;
-    public bool clampYaw = true;
-    public float cameraRotationX = 70;
 
-    //Vector2 inputRotation = Vector2.zero;
-    float pitch = 20;
-    float yaw;
-    float distance = 3;
-
-    private void Start()
-    {
-
-    }
+    public float pitch = 25f;
+    public float yaw = 0f;
+    public float distance = 3.25f;
 
     void FixedUpdate()
     {
@@ -43,31 +33,4 @@ public class CharacterCamera : MonoBehaviour
         Vector3 direction = targetTransform.position - transform.position;
         transform.rotation = Quaternion.LookRotation(direction);
     }
-
-    /*public void OnPitch(InputAction.CallbackContext callbackContext)
-    {
-        pitch += callbackContext.ReadValue<float>();
-        pitch = Mathf.Clamp(pitch, -10, 30);
-    }
-
-    public void OnYaw(InputAction.CallbackContext callbackContext)
-    {
-        yaw += callbackContext.ReadValue<float>();
-        if (clampYaw) yaw = Mathf.Clamp(yaw, -cameraRotationX, cameraRotationX);
-    }*/
-
-    /*public void OnDistance(InputAction.CallbackContext callbackContext)
-    {
-        distance += callbackContext.ReadValue<float>();
-        distance = Mathf.Clamp(distance, 2, 8);
-    }*/
-
-    /*public void OnCenter(InputAction.CallbackContext callbackContext)
-    {
-        if (callbackContext.started)
-        {
-            yaw = 0;
-            pitch = 0;
-        }
-    } */   
 }
