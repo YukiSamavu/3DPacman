@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     public eSpace space = eSpace.World;
     public eMovement movement = eMovement.Free;
     public float turnRate = 3;
+    public float lives = 3;
 
     public enum eSpace
     {
@@ -47,7 +48,7 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        if (animator.GetBool("Death")) return;
+        //if (animator.GetBool("Death")) return;
 
         onGround = characterController.isGrounded;
         if (onGround && velocity.y < 0)
@@ -111,11 +112,20 @@ public class Character : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime);
     }
 
-    public void OnDeath()
+    private void OnTriggerEnter(Collider other)
     {
-        animator.SetBool("Death", true);
-        //EventManager.Instance.TriggerEvent("PlayerDead");
+        if (other.gameObject.tag == "Ghost")
+        {
+            lives--;
+            GameSession.Instance.State = GameSession.eState.StartSession;
+        }
     }
+
+    //public void OnDeath()
+    //{
+    //    animator.SetBool("Death", true);
+    //EventManager.Instance.TriggerEvent("PlayerDead");
+    //}
 
     /*public void OnMove(InputValue input)
     {

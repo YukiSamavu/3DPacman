@@ -36,6 +36,7 @@ public class GameSession : MonoBehaviour
 
     public enum eState
     {
+        Load,
         StartSession,
         Session,
         EndSession,
@@ -59,10 +60,14 @@ public class GameSession : MonoBehaviour
     {
         switch (State)
         {
+            case eState.Load:
+                Score = 0;
+
+                break;
             case eState.StartSession:
                 if (gameOverScreen != null) gameOverScreen.SetActive(false);
-                timer = 30.0f;
-                Score = 0;
+                //timer = 30.0f;
+                //Score = 0;
                 if (player != null)
                 {
                     Destroy(player);
@@ -126,6 +131,9 @@ public class GameSession : MonoBehaviour
 
     private void CheckDeath()
     {
+        
+
+        //if ()
         /*if (playerHealth != null)
         {
             if (playerHealth.health <= 0)
