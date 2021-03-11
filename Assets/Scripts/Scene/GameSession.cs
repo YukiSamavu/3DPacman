@@ -140,7 +140,7 @@ public class GameSession : MonoBehaviour
     {
         pips.Remove(pip);
         if (pipUI != null) pipUI.text = string.Format("{0:D3}", pips.Count);
-        if (pips.Count <= 240)
+        if (pips.Count <= 0)
         {
             State = eState.WinGame;
         }
