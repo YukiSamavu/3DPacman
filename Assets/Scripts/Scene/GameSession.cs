@@ -15,6 +15,7 @@ public class GameSession : MonoBehaviour
     public TextMeshProUGUI scoreUI;
     public TextMeshProUGUI highScoreUI;
     public TextMeshProUGUI timerUI;
+    //public TextMeshProUGUI livesUI;
 
     public Slider slider;
 
@@ -137,14 +138,5 @@ public class GameSession : MonoBehaviour
     private void CheckDeath()
     {
         
-
-        //if ()
-        /*if (playerHealth != null)
-        {
-            if (playerHealth.health <= 0)
-            {
-                State = eState.EndSession;
-            }
-        }*/
     }
 }
