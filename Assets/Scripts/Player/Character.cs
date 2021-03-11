@@ -112,10 +112,12 @@ public class Character : MonoBehaviour
 
     public void OnDeath()
     {
+        inputDirection = Vector3.zero;
+        velocity = Vector3.zero;
+
         Debug.Log("Death");
         isDead = true;
         //lives--;
-        GameSession.Instance.State = GameSession.eState.EndSession;
     }
 
 

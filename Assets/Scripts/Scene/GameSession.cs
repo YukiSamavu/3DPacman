@@ -22,7 +22,7 @@ public class GameSession : MonoBehaviour
     public GameObject gameOverScreen;
 
     GameObject player;
-    //Health playerHealth;
+    Character character;
 
     static GameSession instance = null;
     public static GameSession Instance
@@ -68,25 +68,17 @@ public class GameSession : MonoBehaviour
         {
             case eState.Load:
                 Score = 0;
-
+                State = eState.StartSession;
                 break;
             case eState.StartSession:
                 if (gameOverScreen != null) gameOverScreen.SetActive(false);
-                //timer = 30.0f;
                 Score = 0;
-                if (player != null)
-                {
-                    Destroy(player);
-                    player = null;
-                }
                 //GameController.Instance.transition.StartTransition(Color.clear, 1);
-                //EventManager.Instance.TriggerEvent("StartSession");
-                /*if (player == null)
+                if (player == null)
                 {
                     player = GameObject.FindGameObjectWithTag("Player");
-                    playerHealth = player.GetComponent<Health>();
-                    playerHealth.slider = slider;
-                }*/
+                    character = player.GetComponent<Character>();
+                }
                 State = eState.Session;
                 break;
             case eState.Session:
@@ -114,7 +106,7 @@ public class GameSession : MonoBehaviour
         //SetHighScore();
     }
 
-    public void StartSession()
+    public void QuitToMainMenu()
     {
         GameController.Instance.OnLoadMenuScene("MainMenu");
     }
@@ -137,6 +129,12 @@ public class GameSession : MonoBehaviour
 
     private void CheckDeath()
     {
-        
+        if (character.isDead)
+        {
+            State = eState.EndSession;
+            player.SetActive(false);
+            player = null;
+            character = null;
+        }
     }
 }
