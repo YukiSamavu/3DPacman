@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 78280349649601931}
+  - component: {fileID: -2968838640149142883}
   - component: {fileID: 78280349649601930}
   - component: {fileID: 78280349649601933}
   - component: {fileID: 78280349649601932}
   m_Layer: 0
   m_Name: Crack Cocaine
-  m_TagString: Untagged
+  m_TagString: Pip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,12 +28,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78280349649601935}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1, z: -0.5}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2968838640149142883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78280349649601935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ddb99cb1e85b34408571cad432f1ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 10
+  spawnObject: {fileID: 8729417806523755911, guid: 0cbe12d6adb08dc40a4a477c6e474d3e, type: 3}
 --- !u!33 &78280349649601930
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -90,7 +105,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78280349649601935}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

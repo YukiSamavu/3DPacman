@@ -10,18 +10,17 @@ public class GameSession : MonoBehaviour
     public int Score { get; set; } = 0;
     public int HighScore { get; set; } = 0;
 
-    public bool useTimer = false;
-
     public TextMeshProUGUI scoreUI;
     public TextMeshProUGUI highScoreUI;
-    public TextMeshProUGUI timerUI;
-
-    public Slider slider;
+    public TextMeshProUGUI pipUI;
+    //public TextMeshProUGUI livesUI;
 
     public GameObject gameOverScreen;
+    public GameObject winGameScreen;
 
     GameObject player;
-    //Health playerHealth;
+    Character character;
+    List<GameObject> pips = null;
 
     static GameSession instance = null;
     public static GameSession Instance
@@ -32,18 +31,18 @@ public class GameSession : MonoBehaviour
         }
     }
 
-    float timer = 30.0f;
-
     public enum eState
     {
+        Load,
         StartSession,
         Session,
         EndSession,
-        GameOver
+        GameOver,
+        WinGame
     }
 
-    public eState State { get; set; } = eState.StartSession;
-    //public eState State { get; set; } = eState.Session;
+    public eState State { get; set; } = eState.Load;
+    //public eState State { get; set; } = eState.StartSession;
 
     private void Awake()
     {
@@ -52,35 +51,37 @@ public class GameSession : MonoBehaviour
 
     private void Start()
     {
-        //EventManager.Instance.Subscribe("PlayerDead", CheckDeath);
+        HighScore = GameController.Instance.highScore;
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GameController.Instance.OnPause();
+        }
+
         switch (State)
         {
-            case eState.StartSession:
-                if (gameOverScreen != null) gameOverScreen.SetActive(false);
-                timer = 30.0f;
+            case eState.Load:
                 Score = 0;
-                if (player != null)
-                {
-                    Destroy(player);
-                    player = null;
-                }
-                //GameController.Instance.transition.StartTransition(Color.clear, 1);
-                //EventManager.Instance.TriggerEvent("StartSession");
-                /*if (player == null)
+                if (highScoreUI != null) highScoreUI.text = string.Format("{0:D4}", HighScore);
+                if (player == null)
                 {
                     player = GameObject.FindGameObjectWithTag("Player");
-                    playerHealth = player.GetComponent<Health>();
-                    playerHealth.slider = slider;
-                }*/
+                    character = player.GetComponent<Character>();
+                }
+                pips = new List<GameObject>(GameObject.FindGameObjectsWithTag("Pip"));
+                State = eState.StartSession;
+                break;
+            case eState.StartSession:
+                if (gameOverScreen != null) gameOverScreen.SetActive(false);
+                if (winGameScreen != null) winGameScreen.SetActive(false);
+                GameController.Instance.transition.StartTransition(Color.clear, 1);
                 State = eState.Session;
                 break;
             case eState.Session:
                 CheckDeath();
-                if (useTimer) IncrementTimer();
                 break;
             case eState.EndSession:
                 Cursor.lockState = CursorLockMode.None;
@@ -89,6 +90,11 @@ public class GameSession : MonoBehaviour
                 break;
             case eState.GameOver:
                 if (gameOverScreen != null) gameOverScreen.SetActive(true);
+                break;
+            case eState.WinGame:
+                //GameController.Instance.timeScale = Time.timeScale;
+                //Time.timeScale = 0;
+                if (winGameScreen != null) winGameScreen.SetActive(true);
                 break;
             default:
                 break;
@@ -100,38 +106,43 @@ public class GameSession : MonoBehaviour
         Score += points;
         if (scoreUI != null) scoreUI.text = string.Format("{0:D4}", Score);
 
-        //SetHighScore();
+        SetHighScore();
     }
 
-    public void StartSession()
+    public void QuitToMainMenu()
     {
+        //if (Time.timeScale == 0) Time.timeScale = GameController.Instance.timeScale;
         GameController.Instance.OnLoadMenuScene("MainMenu");
     }
 
     private void SetHighScore()
     {
-        if (Score > HighScore) HighScore = Score;
-        if (highScoreUI != null) highScoreUI.text = string.Format("{0:D4}", HighScore);
-    }
-
-    private void IncrementTimer()
-    {
-        timer -= Time.deltaTime;
-        if (timerUI != null) timerUI.text = string.Format("{0:d2}", (int)timer);
-        if (timer <= 0)
+        if (Score > HighScore)
         {
-            State = eState.EndSession;
+            HighScore = Score;
+            GameController.Instance.SetHighScore(HighScore);
+            if (highScoreUI != null) highScoreUI.text = string.Format("{0:D4}", HighScore);
         }
     }
 
     private void CheckDeath()
     {
-        /*if (playerHealth != null)
+        if (character.isDead)
         {
-            if (playerHealth.health <= 0)
-            {
-                State = eState.EndSession;
-            }
-        }*/
+            State = eState.EndSession;
+            player.SetActive(false);
+            player = null;
+            character = null;
+        }
+    }
+
+    public void UpdatePips(GameObject pip)
+    {
+        pips.Remove(pip);
+        if (pipUI != null) pipUI.text = string.Format("{0:D3}", pips.Count);
+        if (pips.Count <= 240)
+        {
+            State = eState.WinGame;
+        }
     }
 }

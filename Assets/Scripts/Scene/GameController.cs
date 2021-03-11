@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     public GameObject titleScreen;
     public GameObject optionsScreen;
     public GameObject pauseScreen;
-    //public Transition transition;
+    public Transition transition;
 
     public AudioMixer audioMixer;
 
@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
     public int highScore = 0;
 
     bool isPaused = false;
-    float timeScale;
+    public float timeScale;
 
     static GameController instance = null;
     public static GameController Instance { 
@@ -79,9 +79,9 @@ public class GameController : MonoBehaviour
 
     IEnumerator LoadGameScene(string scene)
     {
-        //transition.StartTransition(Color.black, 1);
+        transition.StartTransition(Color.black, 1);
 
-        //while (!transition.IsDone) { yield return null; }
+        while (!transition.IsDone) { yield return null; }
 
         titleScreen.SetActive(false);
         SceneManager.LoadScene(scene);
@@ -99,9 +99,9 @@ public class GameController : MonoBehaviour
 
     IEnumerator LoadMenuScene(string scene)
     {
-        //transition.StartTransition(Color.black, 1);
+        transition.StartTransition(Color.black, 1);
 
-        //while (!transition.IsDone) { yield return null; }
+        while (!transition.IsDone) { yield return null; }
 
         titleScreen.SetActive(true);
         SceneManager.LoadScene(scene);
