@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
     public eSpace space = eSpace.Object;
     public eMovement movement = eMovement.Tank;
     public float turnRate = 3;
-    public float lives = 3;
+    //public float lives = 3;
 
     public enum eSpace
     {
@@ -114,9 +114,10 @@ public class Character : MonoBehaviour
     {
         Debug.Log("Death");
         isDead = true;
-        lives--;
-        GameSession.Instance.State = GameSession.eState.StartSession;
+        //lives--;
+        GameSession.Instance.State = GameSession.eState.EndSession;
     }
+
 
     /*public void OnMove(InputValue input)
     {
