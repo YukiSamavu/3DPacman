@@ -13,6 +13,7 @@ public class ScorePickup : Pickup
             GameSession.Instance.AddPoints((int)amount);
 
             SpawnObject(other);
+            GameSession.Instance.UpdatePips(gameObject);
             Destroy(gameObject);
         }
     }
