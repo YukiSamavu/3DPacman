@@ -52648,6 +52648,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: The Trash Man
       objectReference: {fileID: 0}
+    - target: {fileID: 170443535814200253, guid: 33f5c55b678e0384b9e85683cc618394, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33f5c55b678e0384b9e85683cc618394, type: 3}
 --- !u!1001 &2690169332439641786
@@ -52721,6 +52725,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 420nug
       objectReference: {fileID: 0}
+    - target: {fileID: 2690169333223445293, guid: 9855a3e2b54989a499009f952ffa80ae, type: 3}
+      propertyPath: m_TagString
+      value: Ghost
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9855a3e2b54989a499009f952ffa80ae, type: 3}
 --- !u!4 &2690169332439641787 stripped
@@ -52786,6 +52794,10 @@ PrefabInstance:
     - target: {fileID: 2706871203598195571, guid: f0b2b37e11530bd4490c7d9e436b25e6, type: 3}
       propertyPath: m_Name
       value: Special Browniee
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706871203598195571, guid: f0b2b37e11530bd4490c7d9e436b25e6, type: 3}
+      propertyPath: m_TagString
+      value: Ghost
       objectReference: {fileID: 0}
     - target: {fileID: 2706871204655483960, guid: f0b2b37e11530bd4490c7d9e436b25e6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -52997,6 +53009,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LSD
       objectReference: {fileID: 0}
+    - target: {fileID: 8117047497679219196, guid: 3600003f44262814dbd893e1e84aa96c, type: 3}
+      propertyPath: m_TagString
+      value: Ghost
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3600003f44262814dbd893e1e84aa96c, type: 3}
 --- !u!4 &8117047496920667852 stripped
@@ -53066,6 +53082,10 @@ PrefabInstance:
     - target: {fileID: 8837203920612630717, guid: 9d887ce94bb22b34797ea35de669e04f, type: 3}
       propertyPath: m_Name
       value: Blue Man Reject
+      objectReference: {fileID: 0}
+    - target: {fileID: 8837203920612630717, guid: 9d887ce94bb22b34797ea35de669e04f, type: 3}
+      propertyPath: m_TagString
+      value: Ghost
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d887ce94bb22b34797ea35de669e04f, type: 3}
