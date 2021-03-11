@@ -6,12 +6,12 @@ using UnityEngine;
 public class PacManCamera : MonoBehaviour
 {
     public Transform targetTransform;
-    [Range(0, 20)] public float rate = 1.0f;
+    [Range(0, 20)] public float rate = 5.0f;
     public bool orientToTarget = true;
 
-    public float pitch = 20;
-    public float yaw = 10;
-    public float distance = 3;
+    public float pitch = 25f;
+    public float yaw = 0f;
+    public float distance = 3.25f;
 
     void FixedUpdate()
     {

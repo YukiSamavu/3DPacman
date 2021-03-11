@@ -58,6 +58,11 @@ public class GameSession : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GameController.Instance.OnPause();
+        }
+
         switch (State)
         {
             case eState.Load:

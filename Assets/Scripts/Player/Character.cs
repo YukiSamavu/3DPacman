@@ -1,17 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
 {
     [Range(0, 20)] public float speed = 1;
-    //[Range(0, 20)] public float jump = 1;
-    //[Range(-20, 20)] public float gravity = -9.8f;
-    //public Animator animator;
-    public eSpace space = eSpace.World;
-    public eMovement movement = eMovement.Free;
+    public eSpace space = eSpace.Object;
+    public eMovement movement = eMovement.Tank;
     public float turnRate = 3;
     public float lives = 3;
 
@@ -32,14 +28,15 @@ public class Character : MonoBehaviour
     CharacterController characterController;
     Rigidbody rb;
 
-    //bool onGround = false;
     bool useSession = false;
-    Vector3 inputDirection = Vector3.zero;
+    public bool isDead { get; set; } = false;
+    Vector3 inputDirection = Vector3.forward;
     Vector3 velocity = Vector3.zero;
     Transform cameraTransform;
 
     private void Start()
     {
+        velocity *= speed;
         characterController = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         cameraTransform = Camera.main.transform;
@@ -48,16 +45,6 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        //if (animator.GetBool("Death")) return;
-        /*
-        onGround = characterController.isGrounded;
-        if (onGround && velocity.y < 0)
-        {
-            velocity.y = 0;
-        }
-        */
-        // ***
-
         Quaternion orientation = Quaternion.identity;
         switch (space)
         {
@@ -73,6 +60,16 @@ public class Character : MonoBehaviour
                 break;
             default:
                 break;
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Rotate(Vector3.up, (-90 * turnRate * Time.deltaTime));
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(Vector3.up, (90 * turnRate * Time.deltaTime));
         }
 
         Vector3 direction = Vector3.zero;
@@ -102,13 +99,6 @@ public class Character : MonoBehaviour
         characterController.Move(direction * speed * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, turnRate * Time.deltaTime);
 
-        // Animator
-        //animator.SetFloat("Speed", inputDirection.magnitude);
-        //animator.SetBool("OnGround", onGround);
-        //animator.SetFloat("VelocityY", velocity.y);
-
-        // Gravity Movement
-        //velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
 
@@ -116,16 +106,17 @@ public class Character : MonoBehaviour
     {
         if (other.gameObject.tag == "Ghost")
         {
-            lives--;
-            GameSession.Instance.State = GameSession.eState.StartSession;
+            OnDeath();
         }
     }
 
-    //public void OnDeath()
-    //{
-    //    animator.SetBool("Death", true);
-    //EventManager.Instance.TriggerEvent("PlayerDead");
-    //}
+    public void OnDeath()
+    {
+        Debug.Log("Death");
+        isDead = true;
+        lives--;
+        GameSession.Instance.State = GameSession.eState.StartSession;
+    }
 
     /*public void OnMove(InputValue input)
     {
