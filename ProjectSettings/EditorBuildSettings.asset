@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/GameController.unity
+    guid: a941eb1e0319b8f4cb8c79a974eac00d
+  - enabled: 1
+    path: Assets/Scenes/Pac-Man.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 0cf0b9c8a1ce0f54d88b2108519b1446
   m_configObjects: {}
