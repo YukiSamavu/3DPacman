@@ -7,9 +7,9 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [Range(0, 20)] public float speed = 1;
-    [Range(0, 20)] public float jump = 1;
-    [Range(-20, 20)] public float gravity = -9.8f;
-    public Animator animator;
+    //[Range(0, 20)] public float jump = 1;
+    //[Range(-20, 20)] public float gravity = -9.8f;
+    //public Animator animator;
     public eSpace space = eSpace.World;
     public eMovement movement = eMovement.Free;
     public float turnRate = 3;
@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
     CharacterController characterController;
     Rigidbody rb;
 
-    bool onGround = false;
+    //bool onGround = false;
     bool useSession = false;
     Vector3 inputDirection = Vector3.zero;
     Vector3 velocity = Vector3.zero;
@@ -49,13 +49,13 @@ public class Character : MonoBehaviour
     void Update()
     {
         //if (animator.GetBool("Death")) return;
-
+        /*
         onGround = characterController.isGrounded;
         if (onGround && velocity.y < 0)
         {
             velocity.y = 0;
         }
-
+        */
         // ***
 
         Quaternion orientation = Quaternion.identity;
@@ -103,12 +103,12 @@ public class Character : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, turnRate * Time.deltaTime);
 
         // Animator
-        animator.SetFloat("Speed", inputDirection.magnitude);
-        animator.SetBool("OnGround", onGround);
-        animator.SetFloat("VelocityY", velocity.y);
+        //animator.SetFloat("Speed", inputDirection.magnitude);
+        //animator.SetBool("OnGround", onGround);
+        //animator.SetFloat("VelocityY", velocity.y);
 
         // Gravity Movement
-        velocity.y += gravity * Time.deltaTime;
+        //velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
 

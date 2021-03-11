@@ -67,7 +67,7 @@ public class GameSession : MonoBehaviour
             case eState.StartSession:
                 if (gameOverScreen != null) gameOverScreen.SetActive(false);
                 //timer = 30.0f;
-                //Score = 0;
+                Score = 0;
                 if (player != null)
                 {
                     Destroy(player);
