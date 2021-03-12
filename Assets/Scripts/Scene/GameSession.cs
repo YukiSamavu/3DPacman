@@ -21,6 +21,7 @@ public class GameSession : MonoBehaviour
     GameObject player;
     Character character;
     List<GameObject> pips = null;
+    bool gameWon = false;
 
     static GameSession instance = null;
     public static GameSession Instance
@@ -42,7 +43,6 @@ public class GameSession : MonoBehaviour
     }
 
     public eState State { get; set; } = eState.Load;
-    //public eState State { get; set; } = eState.StartSession;
 
     private void Awake()
     {
@@ -86,14 +86,15 @@ public class GameSession : MonoBehaviour
             case eState.EndSession:
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                State = eState.GameOver;
+                if (gameWon) State = eState.WinGame;
+                else State = eState.GameOver;
                 break;
             case eState.GameOver:
                 if (gameOverScreen != null) gameOverScreen.SetActive(true);
                 break;
             case eState.WinGame:
-                //GameController.Instance.timeScale = Time.timeScale;
-                //Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 if (winGameScreen != null) winGameScreen.SetActive(true);
                 break;
             default:
@@ -111,7 +112,6 @@ public class GameSession : MonoBehaviour
 
     public void QuitToMainMenu()
     {
-        //if (Time.timeScale == 0) Time.timeScale = GameController.Instance.timeScale;
         GameController.Instance.OnLoadMenuScene("MainMenu");
     }
 
@@ -142,7 +142,8 @@ public class GameSession : MonoBehaviour
         if (pipUI != null) pipUI.text = string.Format("{0:D3}", pips.Count);
         if (pips.Count <= 0)
         {
-            State = eState.WinGame;
+            gameWon = true;
+            State = eState.EndSession;
         }
     }
 }

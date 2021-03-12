@@ -9,8 +9,10 @@ public class Teleport : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Teleport");
-        other.gameObject.transform.SetPositionAndRotation(destination.transform.position, other.gameObject.transform.rotation);
+
+        var tempDest = new Vector3();
         
+        other.gameObject.transform.SetPositionAndRotation(tempDest, other.gameObject.transform.rotation);
         //other.gameObject.transform.SetPositionAndRotation(destination.position, other.gameObject.transform.rotation);
     }
 }

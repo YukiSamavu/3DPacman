@@ -72,6 +72,11 @@ public class Character : MonoBehaviour
             transform.Rotate(Vector3.up, (90 * turnRate * Time.deltaTime));
         }
 
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.Rotate(Vector3.up, (180 * turnRate * Time.deltaTime));
+        }
+
         Vector3 direction = Vector3.zero;
         Quaternion rotation = Quaternion.identity;
         switch (movement)
