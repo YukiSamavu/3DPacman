@@ -112,7 +112,7 @@ public class GameSession : MonoBehaviour
 
     public void QuitToMainMenu()
     {
-        GameController.Instance.OnLoadMenuScene("MainMenu");
+        GameController.Instance.OnLoadMenuScene("GameController");
     }
 
     private void SetHighScore()

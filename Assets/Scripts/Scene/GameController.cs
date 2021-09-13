@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
 {
     public GameObject titleScreen;
     public GameObject optionsScreen;
+    public GameObject instructionsScreen;
+    public GameObject creditsScreen;
     public GameObject pauseScreen;
     public Transition transition;
 
@@ -33,8 +35,10 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
-        DontDestroyOnLoad(this);
+        if (instance != null) Destroy(gameObject);
+        else instance = this;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -106,6 +110,10 @@ public class GameController : MonoBehaviour
         titleScreen.SetActive(true);
         SceneManager.LoadScene(scene);
 
+        transition.StartTransition(Color.clear, 1);
+
+        while (!transition.IsDone) { yield return null; }
+
         yield return null;
     }
 
@@ -113,12 +121,26 @@ public class GameController : MonoBehaviour
     {
         titleScreen.SetActive(true);
         optionsScreen.SetActive(false);
+        instructionsScreen.SetActive(false);
+        creditsScreen.SetActive(false);
     }
 
     public void OnOptionsScreen()
     {
         titleScreen.SetActive(false);
         optionsScreen.SetActive(true);
+    }
+
+    public void OnInstructionsScreen()
+    {
+        titleScreen.SetActive(false);
+        instructionsScreen.SetActive(true);
+    }
+
+    public void OnCreditsScreen()
+    {
+        titleScreen.SetActive(false);
+        creditsScreen.SetActive(true);
     }
 
     public void OnPauseScreen()

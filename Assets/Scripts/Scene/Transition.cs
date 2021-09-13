@@ -9,7 +9,7 @@ public class Transition : MonoBehaviour
     public RawImage image;
     public float time;
     public Color color;// = new Color(0, 0, 0, 0);
-    public bool startOnAwake;
+    public bool startOnAwake = true;
 
     public bool IsDone { get; set; }
     Color startColor;

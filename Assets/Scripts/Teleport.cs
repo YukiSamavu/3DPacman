@@ -10,7 +10,7 @@ public class Teleport : MonoBehaviour
     {
         Debug.Log("Teleport");
 
-        var tempDest = new Vector3();
+        var tempDest = Utilities.Wrap(other.gameObject.transform.position, transform.position, destination.transform.position);
         
         other.gameObject.transform.SetPositionAndRotation(tempDest, other.gameObject.transform.rotation);
         //other.gameObject.transform.SetPositionAndRotation(destination.position, other.gameObject.transform.rotation);

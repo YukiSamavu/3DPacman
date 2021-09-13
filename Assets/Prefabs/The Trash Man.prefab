@@ -204,7 +204,6 @@ GameObject:
   - component: {fileID: 7216344870374389393}
   - component: {fileID: 7383671461379277438}
   - component: {fileID: 7383671461379277437}
-  - component: {fileID: 2601769346089459772}
   m_Layer: 0
   m_Name: The Trash Man
   m_TagString: Player
@@ -325,22 +324,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2601769346089459772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7216344870374389394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91a21a6324b93a247bbd80bcfa048d7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  space: 2
-  movement: 1
-  turnRate: 1
 --- !u!1 &7383671461181796260
 GameObject:
   m_ObjectHideFlags: 0
